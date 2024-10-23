@@ -28,5 +28,8 @@ def profile():
     return 'My Profile Page'
 
 if __name__ == '__main__':
-    app.run(debug=True,port=80)
+    # SEE FLASK
+    # SEE FLASK RUN
+    # RUN FLASK RUN
+    app.run(debug=True,port=80,host="0.0.0.0")
 

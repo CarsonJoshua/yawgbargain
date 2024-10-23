@@ -1,7 +1,7 @@
 # Set base image (host OS)
 FROM python:3.12.7
 
-# By default, listen on port 5000
+# By default, listen on port 80
 EXPOSE 80/tcp
 
 # Set the working directory in the container
@@ -18,3 +18,5 @@ COPY app.py .
 
 # Specify the command to run on container start
 CMD [ "python", "./app.py" ]
+
+# CMD ["flask", "run", "--port", "4000"]

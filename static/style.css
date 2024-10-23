@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+}
+
+.header .site-name {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.header .search-bar {
+    flex-grow: 1;
+    margin-left: 20px;
+}
+
+.header input[type="search"] {
+    width: 100%;
+    padding: 5px;
+    font-size: 16px;
+}
+
+.header .user-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.header .user-actions a {
+    text-decoration: none;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 3px;
+}
+
+.header .user-actions a:hover {
+    background-color: #0056b3;
+}

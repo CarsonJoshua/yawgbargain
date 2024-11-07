@@ -1,3 +1,14 @@
+Table card_prices {
+  card_id int [ref:>cards.id]
+  price_date date
+  price num
+  Indexes {
+    (card_id, price_date) [pk]
+    price_date
+    price
+  }
+}
+
 Table cards {
   id int [pk]
   name varchar

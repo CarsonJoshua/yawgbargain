@@ -1,0 +1,48 @@
+Table cards {
+  id int [pk]
+  name varchar
+  Indexes {
+    name
+  }
+}
+
+Table decks {
+  id int [pk]
+  name varchar
+  user_id int [ref:>users.id]
+  format format
+  description varchar
+  Indexes {
+    name
+    user_id
+  }
+}
+
+Table deck_cards {
+  card_id int [ref:>cards.id]
+  deck_id int [ref:>decks.id]
+  count int
+  zone zone
+  Indexes {
+    (card_id, deck_id) [pk]
+    deck_id
+  }
+}
+
+Table users {
+  id int [pk]
+}
+
+Enum zone{
+  main
+  side
+  commander
+}
+
+Enum format{
+  standard
+  commander
+  hamilton
+}
+
+

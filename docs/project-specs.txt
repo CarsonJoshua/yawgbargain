@@ -1,0 +1,47 @@
+#1 Upload/Download deck lists
+    -User create & auth
+    -SQL DB for                     } Populate
+        cards                       }
+            id                      }
+            name <-index            }
+        decks
+            id
+            name <-index
+            user_id <-index
+            format
+            description
+            variant
+        cards
+            id
+            deck_id <- index
+            card_id <-index
+            count
+            zone - main, side, commander
+    -UI
+        -login
+        -upload csv
+        -download csv-select & display deck
+    Estimate of hours?
+    ~Mariadb
+    mysql
+    postgres
+    Django-preffered or
+    -Prisma
+    -SQLAlchemy
+#1a
+    -Website
+    -login-Accessible user_id-Homepage
+    -pg/tab w/ Hamilton
+        $100
+        Diatribe ~ Rant
+            $10 decks
+            -banlist
+            -single mana coin
+    3-5 days
+    prism.sched
+    Price { Object Name }
+          { Model       }
+            -- --       }
+            -- --       } -> SQL
+#2 Price Check
+    -can you daily pull all prices?

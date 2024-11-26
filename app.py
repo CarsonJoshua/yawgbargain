@@ -1,7 +1,14 @@
 from flask import Flask, render_template, session, redirect
+from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
+
+# TODO import config from config file
+app.config['SQKALCHEMY_DATABSE_URI'] = 'yawgbargain-db.c5uok8ai4zek.us-east-1.rds.amazonaws.com'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+
+db = SQLAlchemy(app)
 
 
 @app.route('/')

@@ -1,2 +1,3 @@
 TODO
 schema may require relating different printings of a card with different multiverse ids
+https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html

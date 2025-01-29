@@ -1,19 +1,22 @@
 from flask import Flask, render_template, session, redirect
 from flask_sqlalchemy import SQLAlchemy
 import pandas as pd
-
-
-app = Flask(__name__)
-
 import configparser
+
+
+
+
 
 # Load configuration from a private config file
 config = configparser.ConfigParser()
 config.read('config.ini')
 
 # Apply database configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = config['database']['SQLALCHEMY_DATABASE_URI']
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+app = Flask(__name__)
+app.config["SQLALCHEMY_DATABASE_URI"] = (
+    f"postgresql://{config["database"]["user"]}:{config["database"]["password"]}@{config["database"]["host"]}/{config["database"]["name"]}"
+)
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = config["database"]["SQLALCHEMY_TRACK_MODIFICATIONS"]
 
 db = SQLAlchemy(app)
 
@@ -44,8 +47,13 @@ def index():
 #     return 'My Profile Page'
 
 if __name__ == '__main__':
-    # SEE FLASK
-    # SEE FLASK RUN
-    # RUN FLASK RUN
+    #db test code
+    with app.app_context():
+        try:
+            db.session.execute("SELECT 1")
+            print("Database connection successful!")
+        except Exception as e:
+            print(f"Database connection failed: {e}")
+
     app.run(debug=True,host='0.0.0.0',port=8080)
 

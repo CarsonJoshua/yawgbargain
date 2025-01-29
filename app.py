@@ -14,7 +14,7 @@ config.read('config.ini')
 # Apply database configuration
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = (
-    f"postgresql://{config["database"]["user"]}:{config["database"]["password"]}@{config["database"]["host"]}/{config["database"]["name"]}"
+    f"postgresql://{config["database"]["user"]}:{config["database"]["password"]}@{config["database"]["host"]}"
 )
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = config["database"]["SQLALCHEMY_TRACK_MODIFICATIONS"]
 

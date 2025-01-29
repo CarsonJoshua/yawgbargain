@@ -1,5 +1,6 @@
 from flask import Flask, render_template, session, redirect
-from flask_sqlalchemy import SQLAlchemy, text
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import text
 import pandas as pd
 import configparser
 

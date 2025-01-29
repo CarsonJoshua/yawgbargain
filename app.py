@@ -1,5 +1,5 @@
 from flask import Flask, render_template, session, redirect
-from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy, text
 import pandas as pd
 import configparser
 
@@ -68,7 +68,7 @@ if __name__ == '__main__':
     #db test code
     with app.app_context():
         try:
-            db.session.execute("SELECT 1")
+            db.session.execute(text("SELECT 1"))
             print("Database connection successful!")
         except Exception as e:
             print(f"Database connection failed: {e}")

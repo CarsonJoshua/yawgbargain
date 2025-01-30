@@ -66,8 +66,11 @@ def profile():
 #     return 'My Profile Page'
 
 if __name__ == '__main__':
-    #db test code
     with app.app_context():
+        db.create_all()
+        print("Database tables created successfully!")
+        
+        #db test code
         try:
             db.session.execute(text("SELECT 1"))
             print("Database connection successful!")

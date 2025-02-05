@@ -14,9 +14,11 @@
             <input type="search" placeholder="Search...">
         </div>
         <div class="user-actions">
+            <a href="/pricer">Pricer</a>
             {% if user %}
                 <a href="/decks">My Decks</a>
                 <a href="/profile">My Profile</a>
+                <a href="/logout">Logout</a>
             {% else %}
                 <a href="/login">Login</a>
             {% endif %}

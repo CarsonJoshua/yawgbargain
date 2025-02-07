@@ -1,7 +1,6 @@
 from flask import Flask, render_template, session, redirect, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
-from models import Card, CardPrice
 from datetime import date
 import pandas as pd
 import configparser
@@ -22,6 +21,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = (
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = config["database"]["SQLALCHEMY_TRACK_MODIFICATIONS"]
 
 db = SQLAlchemy(app)
+from models import Card, CardPrice
 
 
 @app.route('/')

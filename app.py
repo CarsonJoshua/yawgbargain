@@ -1,7 +1,7 @@
 from flask import Flask, render_template, session, redirect, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
-from models import db, Card, CardPrice
+from models import Card, CardPrice
 from datetime import date
 import pandas as pd
 import configparser

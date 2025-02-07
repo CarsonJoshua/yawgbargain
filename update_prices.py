@@ -1,6 +1,6 @@
-import requests, json, app
+import requests, json
 from datetime import date
-from app import db
+from app import db, app
 from models import Card, CardPrice
 
 SCRYFALL_BULK_URL = "https://api.scryfall.com/bulk-data"

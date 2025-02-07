@@ -30,6 +30,7 @@ def update_card_prices():
         if line == ']':
             break
         try:
+            line = line[:-1]
             card_info = json.loads(line)
             """Add card to db if not in db"""
             if not Card.query.filter_by(id=card_info.get("oracle_id")):

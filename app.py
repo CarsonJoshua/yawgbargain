@@ -21,7 +21,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = (
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = config["database"]["SQLALCHEMY_TRACK_MODIFICATIONS"]
 
 db = SQLAlchemy(app)
-
+db.init_app(app)
 
 
 @app.route('/')

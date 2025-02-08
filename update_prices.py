@@ -32,11 +32,8 @@ def update_card_prices():
             # print("Array end")
             break
         try:
-            if line[-1]==b',':
+            if line[-1]==ord(','):
                 line = line[:-1]
-            else:
-                print(f'{line} end in {line[-1]}, not {b','}')
-                return
             card_info = json.loads(line)
             """Add card to db if not in db"""
             if not Card.query.filter_by(oracle_id=card_info.get("oracle_id")).first():

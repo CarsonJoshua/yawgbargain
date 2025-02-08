@@ -26,8 +26,10 @@ def update_card_prices():
     
     for line in response.iter_lines():
         if line == '[':
+            print("Array start")
             continue
         if line == ']':
+            print("Array end")
             break
         try:
             line = line[:-1]
@@ -36,9 +38,11 @@ def update_card_prices():
             if not Card.query.filter_by(oracle_id=card_info.get("oracle_id")):
                 db.session.add(Card(oracle_id=card_info.get("oracle_id"),name=card_info.get("name")))
                 db.session.commit()
+                print(f'{card_info.get("oracle_id")} added to cards')
             """Add price to db if not in db"""
             if not CardPrice.query.filter_by(oracle_id=card_info.get("oracle_id"), price_date=today).first():
                 db.session.add(CardPrice(oracle_id=card_info.get("oracle_id"), price_date=today, price=card_info.get("prices").get("usd")))
+                print(f'{card_info.get("oracle_id")}:{today} will be added to card_prices')
         except json.JSONDecodeError as e:
             print(f"Error decoding JSON: {e}\n Line: {line}")
     db.session.commit()

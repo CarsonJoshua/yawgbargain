@@ -19,7 +19,7 @@ class Format(enum.Enum):
 class CardPrice(db.Model):
     __tablename__ = "card_prices"
 
-    card_id = db.Column(UUID(as_uuid=True), db.ForeignKey("cards.id"), primary_key=True)
+    oracle_id = db.Column(UUID(as_uuid=True), db.ForeignKey("cards.id"), primary_key=True)
     price_date = db.Column(db.Date, primary_key=True, index = True)
     price = db.Column(db.Numeric(10, 2), nullable=False, index = True)  
 
@@ -32,7 +32,7 @@ class CardPrice(db.Model):
 class Card(db.Model):
     __tablename__ = "cards"
 
-    id = db.Column(UUID(as_uuid=True), primary_key=True, index = True)
+    oracle_id = db.Column(UUID(as_uuid=True), primary_key=True, index = True)
     name = db.Column(db.String(255), nullable=False)
 
     def __repr__(self):
@@ -55,7 +55,7 @@ class Deck(db.Model):
 class DeckCard(db.Model):
     __tablename__ = "deck_cards"
 
-    card_id = db.Column(UUID(as_uuid=True), db.ForeignKey("cards.id"), primary_key=True)
+    oracle_id = db.Column(UUID(as_uuid=True), db.ForeignKey("cards.id"), primary_key=True)
     deck_id = db.Column(UUID(as_uuid=True), db.ForeignKey("decks.id"), primary_key=True, index = True)
     count = db.Column(db.Integer(), nullable=False)
     zone = db.Column(Enum(Zone), nullable = False)

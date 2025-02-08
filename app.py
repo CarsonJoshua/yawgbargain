@@ -66,7 +66,7 @@ def pricer():
             if card:
                 latest_price = (
                     CardPrice.query
-                    .filter_by(card_id=card.id)
+                    .filter_by(oracle_id=card.oracle_id)
                     .order_by(CardPrice.price_date.desc())  # Get the most recent price
                     .first()
                 )

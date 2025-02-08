@@ -5,13 +5,13 @@
 {% block content %}
 <div style="padding: 20px;">
     <h1>{{ card.name }} Price History</h1>
-
+    
     <!-- Canvas element for the chart -->
     <canvas id="priceChart" width="400" height="200"></canvas>
 
     <script>
         // Get the price data from Flask
-        const priceData = {{ price_data | tojson }};
+        const priceData = {{price_data|tojson}};    
         
         // Extract the dates and prices into separate arrays
         const dates = priceData.map(item => item.date);

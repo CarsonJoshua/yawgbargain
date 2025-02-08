@@ -35,6 +35,7 @@ def update_card_prices():
             """Add card to db if not in db"""
             if not Card.query.filter_by(oracle_id=card_info.get("oracle_id")):
                 db.session.add(Card(oracle_id=card_info.get("oracle_id"),name=card_info.get("name")))
+                db.session.commit()
             """Add price to db if not in db"""
             if not CardPrice.query.filter_by(oracle_id=card_info.get("oracle_id"), price_date=today).first():
                 db.session.add(CardPrice(oracle_id=card_info.get("oracle_id"), price_date=today, price=card_info.get("prices").get("usd")))

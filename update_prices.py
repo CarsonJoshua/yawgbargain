@@ -40,7 +40,7 @@ def update_card_prices():
                 db.session.commit()
                 print(f'{card_info.get("oracle_id")} added to cards')
             """Add price to db if not in db"""
-            if not CardPrice.query.filter_by(oracle_id=card_info.get("oracle_id"), price_date=today).first():
+            if not CardPrice.query.filter_by(oracle_id=card_info.get("oracle_id"), price_date=today).first() and card_info.get("prices").get("usd"):
                 db.session.add(CardPrice(oracle_id=card_info.get("oracle_id"), price_date=today, price=card_info.get("prices").get("usd")))
                 print(f'{card_info.get("oracle_id")}:{today} will be added to card_prices')
         except json.JSONDecodeError as e:

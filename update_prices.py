@@ -25,14 +25,15 @@ def update_card_prices():
         raise Exception("Failed to download price data.")
     
     for line in response.iter_lines():
-        if line == '[':
+        if line == b'[':
             # print("Array start")
             continue
-        if line == ']':
+        if line == b']':
             # print("Array end")
             break
         try:
-            line = line[:-1]
+            if line[-1]==b',':
+                line = line[:-1]
             card_info = json.loads(line)
             """Add card to db if not in db"""
             if not Card.query.filter_by(oracle_id=card_info.get("oracle_id")).first():

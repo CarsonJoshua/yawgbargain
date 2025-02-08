@@ -21,7 +21,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = (
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = config["database"]["SQLALCHEMY_TRACK_MODIFICATIONS"]
 
 db = SQLAlchemy(app)
-from models import Card, CardPrice
+
 
 
 @app.route('/')
@@ -92,7 +92,6 @@ def card_price(oracle_id):
 
 
 if __name__ == '__main__':
-    
-
+    from models import Card, CardPrice
     app.run(debug=True,host=config["flask"]["host"],port=int(config["flask"]["port"]))
 

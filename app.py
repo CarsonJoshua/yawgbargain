@@ -84,16 +84,7 @@ def pricer():
 
 
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
-        print("Database tables created successfully!")
-
-        # #db test code
-        # try:
-        #     db.session.execute(text("SELECT 1"))
-        #     print("Database connection successful!")
-        # except Exception as e:
-        #     print(f"Database connection failed: {e}")
+    
 
     app.run(debug=True,host=config["flask"]["host"],port=int(config["flask"]["port"]))
 

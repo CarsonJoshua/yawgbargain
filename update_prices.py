@@ -35,7 +35,7 @@ def update_card_prices():
             if line[-1]==b',':
                 line = line[:-1]
             else:
-                print(f'{line} end in {line[-1]}')
+                print(f'{line} end in {line[-1]}, not {b','}')
                 return
             card_info = json.loads(line)
             """Add card to db if not in db"""

@@ -3,10 +3,23 @@
 {% block title %}{{ card.name }} Price History{% endblock %}
 
 {% block content %}
-<div style="padding: 20px;">
+<h1>{{ card.name }}</h1>
+<table>
+    <tr>
+        <th>Date</th>
+        <th>Price</th>
+    </tr>
+    {% for data in price_data %}
+    <tr>
+        <td>{{ data.date }}</td>
+        <td>{{ data.price }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<!-- <div style="padding: 20px;">
     <h1>{{ card.name }} Price History</h1>
     
-    <!-- Canvas element for the chart -->
+
     <canvas id="priceChart" width="400" height="200"></canvas>
 
     <script>
@@ -54,5 +67,5 @@
             }
         });
     </script>
-</div>
+</div> -->
 {% endblock %}

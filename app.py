@@ -88,7 +88,7 @@ def card_price(oracle_id):
         return "Card not found", 404
     prices = CardPrice.query.filter_by(oracle_id=card.oracle_id).all()
     price_data = [{"date": price.price_date.strftime('%Y-%m-%d'), "price":price.price} for price in prices]
-    return render_template("card_price.html", card=card, price_data=price_date)
+    return render_template("card_price.html", card=card, price_data=price_data)
 
 
 if __name__ == '__main__':

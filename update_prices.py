@@ -35,7 +35,7 @@ def update_card_prices():
             line = line[:-1]
             card_info = json.loads(line)
             """Add card to db if not in db"""
-            if not Card.query.filter_by(oracle_id=card_info.get("oracle_id")):
+            if not Card.query.filter_by(oracle_id=card_info.get("oracle_id")).first():
                 db.session.add(Card(oracle_id=card_info.get("oracle_id"),name=card_info.get("name")))
                 db.session.commit()
                 print(f'{card_info.get("oracle_id")} added to cards')

@@ -81,6 +81,14 @@ def pricer():
         return render_template('pricer.html', deck_prices=deck_prices, total_price=total_price)
 
     return render_template('pricer.html')
+@app.route("/card_price/<oracle_id>")
+def card_price(oracle_id):
+    card = Card.query.filter_by(oracle_id=oracle_id).first()
+    if not card:
+        return "Card not found", 404
+    prices = CardPrice.query.filter_by(oracle_id=card.oracle_id).all()
+    price_data = [{"date": price.price_date.strftime('%Y-%m-%d'), "price":price.price} for price in prices]
+    return render_template("card_price.html", card=card, price_data=price_date)
 
 
 if __name__ == '__main__':

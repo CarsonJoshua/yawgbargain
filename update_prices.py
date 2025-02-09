@@ -1,5 +1,6 @@
 import requests, json
 from datetime import date
+from run import app
 from app.extensions import db
 from app.models import Card, CardPrice
 
@@ -50,4 +51,5 @@ def update_card_prices():
 
 
 if __name__ == "__main__":
-    update_card_prices()
+    with app.app_context():
+        update_card_prices()

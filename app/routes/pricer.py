@@ -1,6 +1,5 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 from ..models import Card, CardPrice
-from requests import request
 from datetime import date
 
 pricer_bp = Blueprint('pricer', __name__)

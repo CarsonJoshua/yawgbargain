@@ -1,7 +1,7 @@
 import requests, json
 from datetime import date
-from app import db, app
-from models import Card, CardPrice
+from app.extensions import db
+from app.models import Card, CardPrice
 
 SCRYFALL_BULK_URL = "https://api.scryfall.com/bulk-data"
 
@@ -50,5 +50,4 @@ def update_card_prices():
 
 
 if __name__ == "__main__":
-    with app.app_context():
-        update_card_prices()
+    update_card_prices()

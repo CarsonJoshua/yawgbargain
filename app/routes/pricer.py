@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from models import Card, CardPrice
+from ..models import Card, CardPrice
 from requests import request
 from datetime import date
 

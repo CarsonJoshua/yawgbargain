@@ -1,4 +1,3 @@
 TODO
 https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html
 install WSGI for production, maybe gunicorn
-oracle_id is per card, not per printing.  need to revert to id and redo the db.

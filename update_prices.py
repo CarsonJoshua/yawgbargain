@@ -41,8 +41,8 @@ def update_card_prices():
                 db.session.add(Card(id=card_info.get("id"),name=card_info.get("name")))
                 db.session.commit()
             """Add price to db if not in db"""
-            if not CardPrice.query.filter_by(id=card_info.get("id"), price_date=today).first() and card_info.get("prices").get("usd"):
-                db.session.add(CardPrice(id=card_info.get("id"), price_date=today, price=card_info.get("prices").get("usd")))
+            if not CardPrice.query.filter_by(card_id=card_info.get("id"), price_date=today).first() and card_info.get("prices").get("usd"):
+                db.session.add(CardPrice(card_id=card_info.get("id"), price_date=today, price=card_info.get("prices").get("usd")))
         except json.JSONDecodeError as e:
             print(f"Error decoding JSON: {e}\n Line: {line}")
     db.session.commit()

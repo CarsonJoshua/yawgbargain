@@ -7,7 +7,7 @@ from app.models import Card, CardPrice
 SCRYFALL_BULK_URL = "https://api.scryfall.com/bulk-data"
 
 def name_position_file(downloadURL):
-    return f'position-{downloadURL}.txt'
+    return f'position-{downloadURL[downloadURL.rfind('-')+1:downloadURL.find('.json')]}.txt'
 
 def get_download_position(positionFile):
     """Get the last downloaded byte position from the POSITION_FILE."""
@@ -18,8 +18,6 @@ def get_download_position(positionFile):
 
 def save_download_position(positionFile, position):
     """Save the current download byte position to the POSITION_FILE."""
-    if not os.path.exists(positionFile):
-        open(positionFile, 'w').close()
     with open(positionFile, "w") as f:
         f.write(str(position))
 

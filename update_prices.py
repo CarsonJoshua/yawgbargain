@@ -1,8 +1,3 @@
-import os
-
-os.system("source venv/bin/activate")
-
-
 import requests, json
 from datetime import date
 from run import app

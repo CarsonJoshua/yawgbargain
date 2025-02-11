@@ -18,6 +18,8 @@ def get_download_position(positionFile):
 
 def save_download_position(positionFile, position):
     """Save the current download byte position to the POSITION_FILE."""
+    if not os.path.exists(positionFile):
+        open(positionFile, 'w').close()
     with open(positionFile, "w") as f:
         f.write(str(position))
 

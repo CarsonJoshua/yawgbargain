@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}YawgBargain{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static/css', filename='style.css') }}">
 </head>
 <body>
     <!-- Header with site name, search bar, and user actions -->
     <div class="header">
         <div class="site-name">YawgBargain</div>
-        <div class="search-bar">
+        <!-- <div class="search-bar">
             <input type="search" placeholder="Search...">
-        </div>
+        </div> -->
         <div class="user-actions">
             <a href="/pricer">Pricer</a>
             {% if user %}

@@ -1,5 +1,8 @@
 from flask import Blueprint, render_template, request
 from ..models import Card, CardPrice
+from ..extensions import db
+from sqlalchemy import func
+from sqlalchemy.orm import aliased
 from datetime import date
 import decimal
 
@@ -14,27 +17,23 @@ def pricer():
             return render_template('pricer.html')
 
         card_names = [line.strip() for line in deck_text.split("\n") if line.strip()]
-        deck_prices = []
-        total_price = decimal.Decimal(0.0)
 
-        today = date.today()
+        latest_prices = aliased(CardPrice)
 
-        for card_name in card_names:
-            card = Card.query.filter_by(name=card_name).first()
-            if card:
-                latest_price = (
-                    CardPrice.query
-                    .filter_by(card_id=card.id)
-                    .order_by(CardPrice.price_date.desc())  # Get the most recent price
-                    .first()
-                )
-                if latest_price:
-                    deck_prices.append((card_name, latest_price.price))
-                    total_price += latest_price.price
-                else:
-                    deck_prices.append((card_name, "Price not found"))
-            else:
-                deck_prices.append((card_name, "Card not found"))
+        lowest_prices = (
+            db.session.query(
+                Card.name,
+                func.min(latest_prices.price)  # Get the lowest price
+            )
+            .join(latest_prices, Card.id == latest_prices.card_id)
+            .group_by(Card.name, latest_prices.price_date)  # Group by name and date
+            .order_by(latest_prices.price_date.desc())  # Sort by latest price_date
+            .all()
+        )
+
+        deck_prices = [(name, price if price is not None else "Price not found") for name, price in lowest_prices]
+        total_price = sum(price for _, price in deck_prices if isinstance(price, (int, float)))
+
 
         return render_template('pricer.html', deck_prices=deck_prices, total_price=total_price)
 

@@ -13,7 +13,7 @@ def fetch_bulk_price_url():
         raise Exception("Failed to fetch bulk data index.")
     
     for entry in response.json()['data']:
-        if entry['type'] == 'oracle_cards':
+        if entry['type'] == 'default_cards':
             return entry['download_uri']
     
     raise Exception("Price bulk data not found.")

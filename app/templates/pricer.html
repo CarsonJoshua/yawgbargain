@@ -11,7 +11,7 @@
         <textarea id="deck_list" name="deck_list" rows="10" cols="50">
             {%- if deck_prices -%}
                 {%- for card_name, price in deck_prices -%}
-                    {{ card_name }}{% if not loop.last %}\n{% endif %}
+                    {{ card_name }}{% if not loop.last %}&#10;{% endif %}
                 {%- endfor -%}
             {%- endif -%}
         </textarea><br>

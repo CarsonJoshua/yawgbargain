@@ -9,12 +9,11 @@
     <form method="POST">
         <label for="deck_list">Enter Deck List (One card per line):</label><br>
         <textarea id="deck_list" name="deck_list" rows="10" cols="50">
-            {% if deck_prices %}
-                {% for card_name, price in deck_prices %}
-                    {{ card_name }}
-                    {% if not loop.last %}\n{% endif %}
-                {% endfor %}
-            {% endif %}
+            {%- if deck_prices -%}
+                {%- for card_name, price in deck_prices -%}
+                    {{ card_name }}{% if not loop.last %}\n{% endif %}
+                {%- endfor -%}
+            {%- endif -%}
         </textarea><br>
         <button type="submit">Price Deck</button>
     </form>

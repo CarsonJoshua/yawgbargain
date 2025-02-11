@@ -4,7 +4,7 @@ CREATE TABLE cards (
 );
 
 CREATE TABLE card_prices (
-    id UUID REFERENCES cards(id),
+    card_id UUID REFERENCES cards(id),
     price_date DATE NOT NULL,
     price NUMERIC(10,2) NOT NULL,
     PRIMARY KEY (id, price_date)

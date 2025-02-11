@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request
 from ..models import Card, CardPrice
 from datetime import date
+import decimal
 
 pricer_bp = Blueprint('pricer', __name__)
 
@@ -14,7 +15,7 @@ def pricer():
 
         card_names = [line.strip() for line in deck_text.split("\n") if line.strip()]
         deck_prices = []
-        total_price = 0.0
+        total_price = decimal.Decimal(0.0)
 
         today = date.today()
 

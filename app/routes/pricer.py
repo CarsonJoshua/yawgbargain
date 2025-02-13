@@ -3,8 +3,6 @@ from ..models import Card, CardPrice
 from ..extensions import db
 from sqlalchemy import func
 from sqlalchemy.orm import aliased
-from datetime import date
-import decimal
 
 pricer_bp = Blueprint('pricer', __name__)
 
@@ -18,16 +16,23 @@ def pricer():
 
         card_names = [line.strip() for line in deck_text.split("\n") if line.strip()]
 
-        latest_prices = aliased(CardPrice)
 
         lowest_prices = (
             db.session.query(
-                Card.name,
-                func.min(latest_prices.price)  # Get the lowest price
+                db.session.query(
+                    CardPrice.card_id,
+                    func.max(CardPrice.price_date)
+                )
+                .group_by(CardPrice.card_id)
+                .join(
+                    Card,
+                    CardPrice.card_id == Card.id
+                )
+                .filter(Card.name.in_(card_names))
+                .subquery(),
+                func.min(CardPrice.price)
             )
-            .join(latest_prices, Card.id == latest_prices.card_id)
-            .group_by(Card.name, latest_prices.price_date)  # Group by name and date
-            .order_by(latest_prices.price_date.desc())  # Sort by latest price_date
+            .group_by(Card.name)
             .all()
         )
 

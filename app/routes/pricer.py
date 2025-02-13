@@ -64,7 +64,7 @@ def pricer():
         )
 
         deck_prices = [(name, price if price is not None else "Price not found") for name, price in lowest_prices]
-        total_price = sum(price for _, price in deck_prices if isinstance(price, (int, float)))
+        total_price = sum(price for _, price in deck_prices)
 
 
         return render_template('pricer.html', deck_prices=deck_prices, total_price=total_price)

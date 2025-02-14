@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
         footer.style.display = "none";
         toggleButton.textContent = "▲"; // Change to "show" icon
     } else {
+        footer.style.display = "block";
         toggleButton.textContent = "▼"; // Correct icon for shown state
     }
 

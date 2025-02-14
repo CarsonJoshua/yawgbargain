@@ -5,22 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}YawgBargain{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script defer src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 </head>
 <body>
     <!-- Header with site name, search bar, and user actions -->
     <div class="header">
         <div class="site-name">YawgBargain</div>
-        <!-- <div class="search-bar">
-            <input type="search" placeholder="Search...">
-        </div> -->
+
+        <div class="search-bar">
+            <input type="search" placeholder="Search (Coming Soon)..." disabled>
+        </div>
+
         <div class="user-actions">
-            <a href="/pricer">Pricer</a>
+            <a href="/pricer" class="nav-btn">Pricer</a>
             {% if user %}
-                <a href="/decks">My Decks</a>
-                <a href="/profile">My Profile</a>
-                <a href="/logout">Logout</a>
+                <a href="/decks" class="nav-btn">My Decks</a>
+                <a href="/profile" class="nav-btn">Account</a>
+                <a href="/logout" class="nav-btn">Logout</a>
             {% else %}
-                <!-- <a href="/login">Login</a> -->
+                <button class="nav-btn disabled" disabled>Login</button>
             {% endif %}
         </div>
     </div>
@@ -28,6 +31,15 @@
     <!-- Dynamic content block -->
     <div id="content">
         {% block content %}{% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <button id="toggle-footer" class="footer-toggle">▲</button>
+        <div class="footer-content">
+            <p>Support the site:</p>
+            <a href="https://ko-fi.com/" target="_blank" class="ko-fi-button">☕ Buy me a coffee</a>
+        </div>
     </div>
 </body>
 </html>

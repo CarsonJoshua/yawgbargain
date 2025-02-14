@@ -150,3 +150,9 @@ body {
 .footer.hidden .footer-content {
     display: none;
 }
+
+.site-name img {
+    height: 50px; /* Adjust height as needed */
+    width: auto;
+    display: block;
+}

@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const footer = document.getElementById("footer");
+    const footer = document.querySelector(".footer");
     const toggleButton = document.getElementById("footer-toggle");
 
     // Check localStorage for footer state

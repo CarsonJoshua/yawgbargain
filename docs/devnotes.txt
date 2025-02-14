@@ -5,3 +5,9 @@ check pricing data is correct for foil variants, example seen here https://api.s
 should update pricer to support csv
 add ssl cert and make https default
 add styles for mobile support
+fix pricer destroying what it can't understand
+add pricer multiple card support (ie 4 Patchwork Beastie)
+add pricer date pick support
+add search bar
+add account creation
+add deck management

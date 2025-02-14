@@ -19,6 +19,7 @@ body {
     top: 0;
     left: 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
 }
 
 .site-name {
@@ -52,6 +53,7 @@ body {
     align-items: center;
     gap: 10px; 
     flex-wrap: nowrap;
+    flex-shrink: 0;
     justify-content: flex-end;
     max-width: 100%;
     overflow: hidden;
@@ -80,6 +82,7 @@ body {
 .user-actions button {
     white-space: nowrap;
     padding: 8px 15px;
+    max-width: fit-content;
 }
 
 @media (max-width: 600px) {

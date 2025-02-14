@@ -63,7 +63,8 @@ def pricer():
             .all()
         )
 
-        deck_prices = [(name, price if price is not None else "Price not found") for name, price in lowest_prices]
+        deck_prices = [(name, price if price is not None else "Price not found") for name, price in lowest_prices] 
+        + [(name, "Card not found") for name in card_names - [val[0] for val in lowest_prices]]
         total_price = sum(price for _, price in deck_prices)
 
 

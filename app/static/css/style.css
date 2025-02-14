@@ -9,6 +9,7 @@ body {
 
 .header {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     padding: 10px 20px;
@@ -92,9 +93,14 @@ body {
     }
 }
 @media (max-width: 768px) {
+    .header {
+        flex-direction: column; 
+        align-items: center; 
+    }
+
     .user-actions {
-        flex-wrap: wrap; /* Allow wrapping only on mobile */
-        justify-content: center; /* Center buttons for better alignment */
+        justify-content: center;
+        width: 100%;
     }
 }
 

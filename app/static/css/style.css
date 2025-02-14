@@ -91,6 +91,12 @@ body {
         justify-content: flex-end;
     }
 }
+@media (max-width: 768px) {
+    .user-actions {
+        flex-wrap: wrap; /* Allow wrapping only on mobile */
+        justify-content: center; /* Center buttons for better alignment */
+    }
+}
 
 #content {
     margin-top: 60px;

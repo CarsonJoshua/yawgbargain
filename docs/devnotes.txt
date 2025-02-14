@@ -4,7 +4,6 @@ install WSGI for production, maybe gunicorn
 check pricing data is correct for foil variants, example seen here https://api.scryfall.com/cards/297d1cef-c181-481b-912c-385b81efd972
 should update pricer to support csv
 add ssl cert and make https default
-add styles for mobile support
 add pricer multiple card support (ie 4 Patchwork Beastie)
 add pricer date pick support
 add search bar

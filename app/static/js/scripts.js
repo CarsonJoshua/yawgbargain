@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (footerState === "hidden") {
         footer.style.display = "none";
         toggleButton.textContent = "▲"; // Change to "show" icon
+    } else {
+        toggleButton.textContent = "▼"; // Correct icon for shown state
     }
 
     // Toggle footer visibility

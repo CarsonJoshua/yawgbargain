@@ -49,8 +49,12 @@ body {
 
 .user-actions {
     display: flex;
-    gap: 10px;
-    white-space: nowrap; 
+    align-items: center;
+    gap: 10px; 
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 .nav-btn {
@@ -74,8 +78,8 @@ body {
 
 .user-actions a,
 .user-actions button {
-    min-width: 80px;
-    text-align: center;
+    white-space: nowrap;
+    padding: 8px 15px;
 }
 
 @media (max-width: 600px) {
@@ -119,7 +123,8 @@ body {
 }
 
 .footer-content {
-    display: none;
+    display: block;
+    padding: 10px;
 }
 
 .footer.hidden {

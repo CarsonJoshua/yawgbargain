@@ -62,7 +62,11 @@ def pricer():
             else:
                 deck_prices.append((amount, name, "Card not found"))
 
-        total_price = sum(price for _,_, price in deck_prices)
+        total_price = sum(
+            amount * (price if isinstance(price, (int, float)) else 0) 
+            for amount, _, price in deck_prices
+        )
+
 
 
         return render_template('pricer.html', deck_list=deck_list, deck_prices=deck_prices, total_price=total_price)

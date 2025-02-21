@@ -9,34 +9,23 @@ pricer_bp = Blueprint('pricer', __name__)
 @pricer_bp.route('/pricer', methods=['GET', 'POST'])
 def pricer():
     if request.method == 'POST':
-        deck_text = request.form.get('deck_list', '').strip()
-        if not deck_text:
-            # flash("Please enter a deck list.", "error")
+        deck_list = request.form.get('deck_list', '').strip()
+        if not deck_list:
             return render_template('pricer.html')
 
-        card_names = [line.strip() for line in deck_text.split("\n") if line.strip()]
+        card_entries = []
+        for line in deck_list.split("\n"):
+            line = line.strip()
+            if line:
+                match = re.match(r'(\d+)\s+(.*)', line)
+                if match:
+                    amount = int(match.group(1))
+                    card_name = match.group(2)
+                else:
+                    amount = 1
+                    card_name = line
+                card_entries.append((amount, card_name))
 
-
-        # lowest_prices = (
-        #     db.session.query(
-        #         db.session.query(
-        #             CardPrice.card_id,
-        #             func.max(CardPrice.price_date)
-        #         )
-        #         .group_by(CardPrice.card_id)
-        #         .join(
-        #             Card,
-        #             CardPrice.card_id == Card.id
-        #         )
-        #         .filter(Card.name.in_(card_names))
-        #         .subquery(),
-        #         func.min(CardPrice.price)
-        #     )
-        #     .group_by(Card.name)
-        #     .all()
-        # )
-
-        
         latest_price_subquery = (
             db.session.query(
                 CardPrice.card_id,
@@ -44,11 +33,10 @@ def pricer():
             )
             .group_by(CardPrice.card_id) 
             .join(Card, CardPrice.card_id == Card.id) 
-            .filter(Card.name.in_(card_names))  
+            .filter(Card.name.in_(name for _, name in card_entries))  
             .subquery()
         )
 
-       
         lowest_prices = (
             db.session.query(
                 Card.name,
@@ -63,10 +51,17 @@ def pricer():
             .all()
         )
 
-        deck_prices = [(name, price if price is not None else "Price not found") for name, price in lowest_prices] + [(name, "Card not found") for name in set(card_names) - set([val[0] for val in lowest_prices])]
-        total_price = sum(price for _, price in lowest_prices)
+        deck_prices = [
+            (amount, name, price if price is not None else "Price not found") 
+            for (amount, name), (name, price) in zip(card_entries, lowest_prices)
+        ] + [
+            (amount, name, "Card not found") 
+            for amount, name in card_entries
+            if name not in {val[0] for val in lowest_prices}
+        ]
+        total_price = sum(price for _,_, price in lowest_prices)
 
 
-        return render_template('pricer.html', deck_prices=deck_prices, total_price=total_price)
+        return render_template('pricer.html', deck_list=deck_list, deck_prices=deck_prices, total_price=total_price)
 
     return render_template('pricer.html')

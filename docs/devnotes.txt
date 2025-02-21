@@ -9,3 +9,4 @@ add pricer date pick support
 add search bar
 add account creation
 add deck management
+make update_prices.py clean up after itself (also does it actually work? where is it restarting?  maybe part of the cron job or something)

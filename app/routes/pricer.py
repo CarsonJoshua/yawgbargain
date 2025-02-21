@@ -3,6 +3,7 @@ from ..models import Card, CardPrice
 from ..extensions import db
 from sqlalchemy import func
 from sqlalchemy.orm import aliased
+import re
 
 pricer_bp = Blueprint('pricer', __name__)
 

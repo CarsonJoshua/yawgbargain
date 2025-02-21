@@ -52,14 +52,16 @@ def pricer():
             .all()
         )
 
-        deck_prices = [
-            (amount, name, price if price is not None else "Price not found") 
-            for (amount, name), (name, price) in zip(card_entries, lowest_prices)
-        ] + [
-            (amount, name, "Card not found") 
-            for amount, name in card_entries
-            if name not in {val[0] for val in lowest_prices}
-        ]
+        lowest_price_dict = {name: price for name, price in lowest_prices}
+
+        deck_prices = []
+        for amount, name in card_entries:
+            if name in lowest_price_dict:
+                price = lowest_price_dict[name]
+                deck_prices.append((amount, name, price if price is not None else "Price not found"))
+            else:
+                deck_prices.append((amount, name, "Card not found"))
+
         total_price = sum(price for _,_, price in deck_prices)
 
 

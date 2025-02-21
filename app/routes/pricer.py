@@ -63,7 +63,7 @@ def pricer():
                 deck_prices.append((amount, name, "Card not found"))
 
         total_price = sum(
-            amount * (price if isinstance(price, (int, float)) else 0) 
+            amount * (price if not isinstance(price, (str)) else 0) 
             for amount, _, price in deck_prices
         )
 

@@ -60,7 +60,7 @@ def pricer():
             for amount, name in card_entries
             if name not in {val[0] for val in lowest_prices}
         ]
-        total_price = sum(price for _,_, price in lowest_prices)
+        total_price = sum(price for _,_, price in deck_prices)
 
 
         return render_template('pricer.html', deck_list=deck_list, deck_prices=deck_prices, total_price=total_price)

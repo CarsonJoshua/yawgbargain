@@ -13,9 +13,11 @@ def create_app():
     from .routes import index_bp
     from .routes import card_price_bp
     from .routes import pricer_bp
+    from .routes import release_notes_bp
     
     app.register_blueprint(index_bp)
     app.register_blueprint(card_price_bp)
     app.register_blueprint(pricer_bp)
+    app.register_blueprint(release_notes_bp)
 
     return app

@@ -1,12 +1,17 @@
 /* theme.css */
 
-body.light-mode {
+body.light-mode, body.light-mode textarea {
     background-color: #f0f0f0;
     color: #000;
 }
 
 body.dark-mode {
     background-color: #222;
+    color: #fff;
+}
+
+body.dark-mode textarea, body.dark-mode button{
+    background-color: #333; 
     color: #fff;
 }
 

@@ -1,6 +1,6 @@
 from flask import Flask
 from .config import Config
-from .extensions import db  # Import db from extensions.py
+from .dao import db  # Import db from extensions.py
 
 def create_app():
     app = Flask(__name__)

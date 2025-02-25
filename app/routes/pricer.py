@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request
 from ..models import Card, CardPrice
-from ..extensions import db
+from ..dao import db
 from sqlalchemy import func
 from sqlalchemy.orm import aliased
 import re

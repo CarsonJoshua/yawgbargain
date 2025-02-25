@@ -1,0 +1,19 @@
+/* theme.css */
+
+body.light-mode {
+    background-color: #f0f0f0;
+    color: #000;
+}
+
+body.dark-mode {
+    background-color: #222;
+    color: #fff;
+}
+
+body.red-3d {
+    text-shadow: 1px 1px 0 red;
+}
+
+body.blue-3d {
+    text-shadow: -1px -1px 0 blue;
+}

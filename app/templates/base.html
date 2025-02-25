@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}YawgBargain{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <script defer src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
+    <script defer src="{{ url_for('static', filename='js/footer_button.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='js/theme_change.js') }}"></script>
 </head>
 <body>
     <!-- Header with site name, search bar, and user actions -->
@@ -42,8 +44,20 @@
         <div class="footer-content">
             <p>Support the site:</p>
             <a href="https://ko-fi.com/carsonjoshua" target="_blank" class="ko-fi-button">☕ Buy me a coffee</a>
+            <div>
+                <label>
+                    <input type="radio" name="theme" value="light" checked> Light Mode
+                </label>
+                <label>
+                    <input type="radio" name="theme" value="dark"> Dark Mode
+                </label>
+                <label>
+                    <input type="checkbox" id="3d-mode"> 3D Text Mode
+                </label>
+            </div>
         </div>
     </div>
+    
 
     <button id="footer-toggle" class="footer-toggle">▲</button>
 </body>

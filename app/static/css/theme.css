@@ -10,10 +10,10 @@ body.dark-mode {
     color: #fff;
 }
 
-body.red-3d {
-    text-shadow: 1px 1px 0 red;
+body.three-d-mode {
+    text-shadow: 
+        -3px 2px 2px red,  /* Red shadow offset to the left */
+         3px -1px 2px blue; /* Blue shadow offset to the right */
+    color: transparent; /* Hide the original text */
 }
 
-body.blue-3d {
-    text-shadow: -1px -1px 0 blue;
-}

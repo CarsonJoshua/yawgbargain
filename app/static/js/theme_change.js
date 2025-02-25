@@ -19,9 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function update3DMode() {
         if (threeDCheckbox.checked) {
-            body.classList.add('red-3d', 'blue-3d');
+            body.classList.add('three-d-mode');
         } else {
-            body.classList.remove('red-3d', 'blue-3d');
+            body.classList.remove('three-d-mode');
         }
     }
+    
 });

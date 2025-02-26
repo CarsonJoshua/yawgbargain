@@ -1,7 +1,8 @@
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import func
 
-db = SQLAlchemy()
+from sqlalchemy import func
+from .models import Card, CardPrice
+
+
 
 def get_latest_prices(card_names):
     """Fetches the latest price for each card in the given list of names."""
@@ -9,8 +10,9 @@ def get_latest_prices(card_names):
         return {}
     
     
-    from app.models.card import Card
-    from app.models.card_price import CardPrice
+
+    cards = Card.query.filter(Card.name.in_(card_names)).all()
+    card_id_map = {card.name: card.id for card in cards}
 
     latest_price_subquery = (
         db.session.query(
@@ -37,4 +39,12 @@ def get_latest_prices(card_names):
         .all()
     )
 
-    return {name: price for name, price in lowest_prices}
+    # Combine card IDs with the lowest prices
+    price_dict = {}
+    for name, price in lowest_prices:
+        price_dict[name] = {
+            'lowest_price': price,
+            'card_id': card_id_map.get(name)  # Get the card ID from the map
+        }
+
+    return price_dict

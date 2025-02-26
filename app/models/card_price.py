@@ -1,4 +1,4 @@
-from ..dao import db
+from . import db
 from sqlalchemy import UUID
 
 class CardPrice(db.Model):

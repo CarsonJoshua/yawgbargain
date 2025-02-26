@@ -48,3 +48,9 @@ def get_latest_prices(card_names):
         }
 
     return price_dict
+
+def get_card_by_id(card_id):
+    return db.session.query(Card).filter_by(id=card_id).first()
+
+def get_card_prices_by_id(card_id):
+    return db.session.query(CardPrice).filter_by(card_id=card_id).all()

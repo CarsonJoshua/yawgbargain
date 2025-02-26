@@ -28,7 +28,7 @@
         <h3>Deck Pricing</h3>
         <ul>
             {% for amount, card_id, card_name, price in deck_prices %}
-                <li>{{ amount }} <a href="{{ url_for('card_history', id=card_id) }}">{{ card_name }}</a> - {{ price }}{% if amount > 1 %} (each){% endif %}</li>
+                <li>{{ amount }} <a href="{{ url_for('card_history.card_history', id=card_id) }}">{{ card_name }}</a> - {{ price }}{% if amount > 1 %} (each){% endif %}</li>
             {% endfor %}
         </ul>
         <h3>Total Price: {{ total_price }}</h3>

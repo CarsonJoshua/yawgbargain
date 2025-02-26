@@ -29,17 +29,20 @@ def pricer():
 
         deck_prices = []
         for amount, name in card_entries:
-            if name in lowest_price_dict:
-                price = lowest_price_dict[name]
-                deck_prices.append((amount, name, price if price is not None else "Price not found"))
+            price_info = lowest_price_dict.get(name)
+            if price_info:
+                price = price_info['lowest_price']
+                card_id = price_info['card_id']
+                deck_prices.append((amount, card_id, name, price if price is not None else "Price not found"))
             else:
-                deck_prices.append((amount, name, "Card not found"))
+                deck_prices.append((amount, None, name, "Card not found"))
 
         total_price = sum(
             amount * (price if not isinstance(price, str) else 0) 
-            for amount, _, price in deck_prices
+            for amount, _, _, price in deck_prices
         )
 
         return render_template('pricer.html', deck_list=deck_list, deck_prices=deck_prices, total_price=total_price)
 
     return render_template('pricer.html')
+

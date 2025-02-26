@@ -1,5 +1,5 @@
 from .index import index_bp
-from .card_price import card_price_bp
+from .card_history import card_history_bp
 from .pricer import pricer_bp
 from .release_notes import release_notes_bp
 

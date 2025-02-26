@@ -1,6 +1,6 @@
 
 from sqlalchemy import func
-from .models import Card, CardPrice
+from .models import db, Card, CardPrice
 
 
 

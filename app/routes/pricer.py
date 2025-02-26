@@ -1,8 +1,5 @@
 from flask import Blueprint, render_template, request
-from ..models import Card, CardPrice
-from ..dao import db
-from sqlalchemy import func
-from sqlalchemy.orm import aliased
+from ..dao import get_latest_prices
 import re
 
 pricer_bp = Blueprint('pricer', __name__)
@@ -27,32 +24,8 @@ def pricer():
                     card_name = line
                 card_entries.append((amount, card_name))
 
-        latest_price_subquery = (
-            db.session.query(
-                CardPrice.card_id,
-                func.max(CardPrice.price_date).label('latest_price_date')  
-            )
-            .group_by(CardPrice.card_id) 
-            .join(Card, CardPrice.card_id == Card.id) 
-            .filter(Card.name.in_(name for _, name in card_entries))  
-            .subquery()
-        )
-
-        lowest_prices = (
-            db.session.query(
-                Card.name,
-                func.min(CardPrice.price).label('lowest_price')  
-            )
-            .join(Card, CardPrice.card_id == Card.id) 
-            .join(latest_price_subquery, 
-                (CardPrice.card_id == latest_price_subquery.c.card_id) &
-                (CardPrice.price_date == latest_price_subquery.c.latest_price_date) 
-            )
-            .group_by(Card.name)  
-            .all()
-        )
-
-        lowest_price_dict = {name: price for name, price in lowest_prices}
+        card_names = [name for _, name in card_entries]
+        lowest_price_dict = get_latest_prices(card_names)
 
         deck_prices = []
         for amount, name in card_entries:
@@ -63,11 +36,9 @@ def pricer():
                 deck_prices.append((amount, name, "Card not found"))
 
         total_price = sum(
-            amount * (price if not isinstance(price, (str)) else 0) 
+            amount * (price if not isinstance(price, str) else 0) 
             for amount, _, price in deck_prices
         )
-
-
 
         return render_template('pricer.html', deck_list=deck_list, deck_prices=deck_prices, total_price=total_price)
 

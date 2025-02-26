@@ -1,7 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
-from app.models.card import Card
-from app.models.card_price import CardPrice
 
 db = SQLAlchemy()
 
@@ -9,6 +7,10 @@ def get_latest_prices(card_names):
     """Fetches the latest price for each card in the given list of names."""
     if not card_names:
         return {}
+    
+    
+    from app.models.card import Card
+    from app.models.card_price import CardPrice
 
     latest_price_subquery = (
         db.session.query(

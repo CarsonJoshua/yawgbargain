@@ -1,71 +1,36 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
-{% block title %}{{ card.name }} Price History{% endblock %}
+{% block title %}Card History - {{ card.name }}{% endblock title %}
 
 {% block content %}
-<h1>{{ card.name }}</h1>
-<table>
-    <tr>
-        <th>Date</th>
-        <th>Price</th>
-    </tr>
-    {% for data in price_data %}
-    <tr>
-        <td>{{ data.date }}</td>
-        <td>{{ data.price }}</td>
-    </tr>
-    {% endfor %}
-</table>
-<!-- <div style="padding: 20px;">
-    <h1>{{ card.name }} Price History</h1>
-    
+<div>
+    <h2>{{ card.name }} - Price History</h2>
 
     <canvas id="priceChart" width="400" height="200"></canvas>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // Get the price data from Flask
-        const priceData = {{price_data|tojson}};    
-        
-        // Extract the dates and prices into separate arrays
-        const dates = priceData.map(item => item.date);
-        const prices = priceData.map(item => item.price);
-
-        // Set up the Chart.js chart
         const ctx = document.getElementById('priceChart').getContext('2d');
         const priceChart = new Chart(ctx, {
-            type: 'line', // Line chart for price history
+            type: 'line',
             data: {
-                labels: dates, // X-axis: Dates
+                labels: {{ dates | tojson | safe }},  // Dates on the x-axis
                 datasets: [{
                     label: 'Price',
-                    data: prices, // Y-axis: Prices
+                    data: {{ prices | tojson | safe }},  // Prices on the y-axis
                     borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1,
-                    fill: false
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderWidth: 1
                 }]
             },
             options: {
-                responsive: true,
                 scales: {
-                    x: {
-                        type: 'category',
-                        title: {
-                            display: true,
-                            text: 'Date'
-                        }
-                    },
                     y: {
-                        title: {
-                            display: true,
-                            text: 'Price'
-                        },
-                        ticks: {
-                            beginAtZero: false
-                        }
+                        beginAtZero: true
                     }
                 }
             }
         });
     </script>
-</div> -->
-{% endblock %}
+</div>
+{% endblock content %}

@@ -4,7 +4,7 @@ from .models import db, Card, CardPrice
 
 
 
-def get_latest_prices(card_names):
+def get_latest_prices(card_names, price_date):
     """Fetches the latest price for each card in the given list of names."""
     if not card_names:
         return {}
@@ -19,6 +19,7 @@ def get_latest_prices(card_names):
             CardPrice.card_id,
             func.max(CardPrice.price_date).label('latest_price_date')
         )
+        .filter(CardPrice.price_date <= price_date)
         .group_by(CardPrice.card_id)
         .join(Card, CardPrice.card_id == Card.id)
         .filter(Card.name.in_(card_names))

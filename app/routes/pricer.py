@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request
+from datetime import datetime
 from ..dao import get_latest_prices
 import re
 
@@ -8,8 +9,13 @@ pricer_bp = Blueprint('pricer', __name__)
 def pricer():
     if request.method == 'POST':
         deck_list = request.form.get('deck_list', '').strip()
+        price_date = request.form.get('price_date', '').strip()
+
+        if not price_date:
+            price_date = datetime.today().strftime('%Y-%m-%d')
+
         if not deck_list:
-            return render_template('pricer.html')
+            return render_template('pricer.html', price_date=price_date)
 
         card_entries = []
         for line in deck_list.split("\n"):
@@ -22,14 +28,14 @@ def pricer():
                 else:
                     amount = 1
                     card_name = line
-                card_entries.append((amount, card_name))
+                card_entries.append((amount, card_name)) 
 
         card_names = [name for _, name in card_entries]
-        lowest_price_dict = get_latest_prices(card_names)
+        lowest_price_dict = get_latest_prices(card_names, price_date) 
 
         deck_prices = []
         for amount, name in card_entries:
-            price_info = lowest_price_dict.get(name)
+            price_info = lowest_price_dict.get(name) 
             if price_info:
                 price = price_info['lowest_price']
                 card_id = price_info['card_id']
@@ -42,7 +48,7 @@ def pricer():
             for amount, _, _, price in deck_prices
         )
 
-        return render_template('pricer.html', deck_list=deck_list, deck_prices=deck_prices, total_price=total_price)
+        return render_template('pricer.html', deck_list=deck_list, deck_prices=deck_prices, total_price=total_price, price_date=price_date)
 
-    return render_template('pricer.html')
-
+    default_date = datetime.today().strftime('%Y-%m-%d')
+    return render_template('pricer.html', price_date=default_date)

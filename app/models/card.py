@@ -8,4 +8,4 @@ class Card(db.Model):
     name = db.Column(db.String(255), nullable=False)
 
     def __repr__(self):
-        return f"<Card {self.name}>"
+        return f"<Card {self.name}: {self.id}>"

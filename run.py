@@ -12,20 +12,20 @@ def activate_venv():
         return os.path.join("venv", "bin", "activate")  # Linux/macOS activation script
     
 
-from app import create_app
-from app.config import Config
 
-app = create_app()
 
 if __name__ == "__main__":
+    venv_activation = activate_venv()
+    if platform.system() == "Windows":
+        subprocess.call(f'{venv_activation}', shell=True)
+    else:
+        subprocess.call(f'source {venv_activation}', shell=True, executable='/bin/bash')
+        from app import create_app
+    from app.config import Config
+    app = create_app()
     if Config.DEBUG:
         print("Running in debug mode...")
         app.run(debug=True)  # Run Flask's built-in server
     else:
         print("Running in production mode...")
-        venv_activation = activate_venv()
-
-        if platform.system() == "Windows":
-            subprocess.call(f'{venv_activation} && gunicorn -w 4 -b 127.0.0.1:5000 "app:create_app()"', shell=True)
-        else:
-            subprocess.call(f'source {venv_activation} && gunicorn -w 4 -b 127.0.0.1:5000 "app:create_app()"', shell=True, executable='/bin/bash')
+        subprocess.call(f'gunicorn -w 4 -b 127.0.0.1:5000 "app:create_app()"', shell=True)

@@ -9,3 +9,4 @@ make update_prices.py clean up after itself (also does it actually work? where i
 license the logo font before any commercial use https://rometheme.net/product/exodar-futuristic-font/
 formatting for pricer, second column for prices, prices on left side for readability, red color cards not found, maybe alert
 add support for set specified cards, make links in pricer go to name based pricing, except set specified ones connecting to id still
+analyze and trim requirements.txt

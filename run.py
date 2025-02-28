@@ -1,10 +1,8 @@
 import os
 import subprocess
-from app import create_app
-from app.config import Config
 import platform
 
-app = create_app()
+
 
 def activate_venv():
     """Returns the appropriate command to activate the virtual environment based on the OS."""
@@ -12,6 +10,12 @@ def activate_venv():
         return os.path.join("venv", "Scripts", "activate")  # Windows activation script
     else:
         return os.path.join("venv", "bin", "activate")  # Linux/macOS activation script
+    
+
+from app import create_app
+from app.config import Config
+
+app = create_app()
 
 if __name__ == "__main__":
     if Config.DEBUG:

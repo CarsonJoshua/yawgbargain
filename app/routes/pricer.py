@@ -31,15 +31,14 @@ def pricer():
                 card_entries.append((amount, card_name)) 
 
         card_names = [name for _, name in card_entries]
-        lowest_price_dict = get_latest_prices(card_names, price_date) 
+        price_dict = get_latest_prices(card_names, price_date) 
 
         deck_prices = []
         for amount, name in card_entries:
-            price_info = lowest_price_dict.get(name) 
+            price_info = price_dict.get(name.lower()) 
             if price_info:
-                price = price_info['lowest_price']
-                card_id = price_info['card_id']
-                deck_prices.append((amount, card_id, name, price if price is not None else "Price not found"))
+                price = price_info['price']
+                deck_prices.append((amount, price_info['id'], price_info['name'], price if price is not None else "Price not found"))
             else:
                 deck_prices.append((amount, None, name, "Card not found"))
 

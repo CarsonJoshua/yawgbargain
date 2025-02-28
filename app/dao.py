@@ -1,18 +1,12 @@
 
-from sqlalchemy import func
+from sqlalchemy import func, any_, or_
 from .models import db, Card, CardPrice
 
 
 
 def get_latest_prices(card_names, price_date):
-    """Fetches the latest price for each card in the given list of names."""
     if not card_names:
         return {}
-    
-    
-
-    cards = Card.query.filter(Card.name.in_(card_names)).all()
-    card_id_map = {card.name: card.id for card in cards}
 
     latest_price_subquery = (
         db.session.query(
@@ -22,30 +16,31 @@ def get_latest_prices(card_names, price_date):
         .filter(CardPrice.price_date <= price_date)
         .group_by(CardPrice.card_id)
         .join(Card, CardPrice.card_id == Card.id)
-        .filter(Card.name.in_(card_names))
         .subquery()
     )
 
     lowest_prices = (
         db.session.query(
             Card.name,
+            Card.id,
             func.min(CardPrice.price).label('lowest_price')
         )
-        .join(Card, CardPrice.card_id == Card.id)
+        .filter(func.lower(Card.name).in_([name.lower() for name in card_names]))
         .join(latest_price_subquery,
             (CardPrice.card_id == latest_price_subquery.c.card_id) &
             (CardPrice.price_date == latest_price_subquery.c.latest_price_date)
         )
-        .group_by(Card.name)
+        .join(Card, CardPrice.card_id == Card.id)
+        .group_by(Card.name, Card.id)
         .all()
     )
 
-    # Combine card IDs with the lowest prices
     price_dict = {}
-    for name, price in lowest_prices:
-        price_dict[name] = {
-            'lowest_price': price,
-            'card_id': card_id_map.get(name)  # Get the card ID from the map
+    for name, id, price in lowest_prices:
+        price_dict[name.lower()] = {
+            'name': name,
+            'price': price,
+            'id': id
         }
 
     return price_dict

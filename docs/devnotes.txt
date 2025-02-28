@@ -2,7 +2,6 @@ TODO
 https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html
 check pricing data is correct for foil variants, example seen here https://api.scryfall.com/cards/297d1cef-c181-481b-912c-385b81efd972
 add button on pricer to import csv
-add pricer date pick support
 add search bar
 add account creation
 add deck management

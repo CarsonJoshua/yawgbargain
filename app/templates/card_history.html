@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Card History - {{ card.name }}{% endblock title %}
+
+{% block content %}
+<div class="content">
+    <h2>{{ card.name }} - Price History</h2>
+
+    <canvas id="priceChart" width="400" height="200"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('priceChart').getContext('2d');
+        const priceChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: {{ dates | tojson | safe }},  // Dates on the x-axis
+                datasets: [{
+                    label: 'Price',
+                    data: {{ prices | tojson | safe }},  // Prices on the y-axis
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</div>
+{% endblock content %}

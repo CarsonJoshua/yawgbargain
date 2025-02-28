@@ -1,13 +1,23 @@
 {% extends 'base.html' %}
 
-{% block title %}YawgBargain - Home{% endblock %}
+{% block title %}YawgBargain - Home{% endblock title %}
 
 {% block content %}
-<div style="padding: 20px;">
+<div class="content">
     <h1>Release Notes</h1>
     <h2>2025-02-28</h2>
     <p>
         <ul>
+            <li>Added supported pricer formats, the following are now supported:</li>
+            <ul>
+                <li>Yawgmoth's Bargain (just card name)</li>
+                <li>1 Yawgmoth's Bargain (amount and card name, space seperated)</li>
+                <li>1x Yawgmoth's Bargain (amount and card name, space seperated, with x indicated amount)</li>
+            </ul>
+            <li>Fixed case sensitivity in pricer</li>
+            <li>Pricer outputs column of prices for easier visual assessment</li>
+            <li>Pricer displays in two columns</li>
+            <li>Pricer output links to pricing data</li>
             <li>Theme Light/Dark/3D added in footer</li>
         </ul>
     </p>
@@ -27,4 +37,4 @@
         </ul>
     </p>
 </div>
-{% endblock %}
+{% endblock content %}

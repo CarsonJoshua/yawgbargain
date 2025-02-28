@@ -152,7 +152,45 @@ body {
 }
 
 .site-name img {
-    height: 50px; /* Adjust height as needed */
-    width: auto;
     display: block;
 }
+
+.content {
+    padding: 20px;
+}
+
+.deck-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap; /* Ensures elements wrap on smaller screens */
+}
+
+.deck-input, .deck-output {
+    flex: 1;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+/* Default: Two-column layout */
+@media (min-width: 768px) { 
+    .deck-container {
+        flex-wrap: nowrap; /* Prevents wrapping on larger screens */
+    }
+
+    .deck-input, .deck-output {
+        width: 50%; /* Each takes half the screen */
+    }
+}
+
+/* Mobile: One-column layout */
+@media (max-width: 767px) {
+    .deck-container {
+        flex-direction: column; /* Stack items vertically */
+    }
+
+    .deck-input, .deck-output {
+        width: 100%; /* Full width on small screens */
+    }
+}
+

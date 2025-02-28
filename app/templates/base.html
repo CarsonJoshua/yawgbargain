@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" name="base" keywords="" description=""
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}YawgBargain{% endblock %}</title>
+    <title>{% block title %}YawgBargain{% endblock title %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
     <script defer src="{{ url_for('static', filename='js/footer_button.js') }}"></script>
@@ -14,7 +14,7 @@
     <div class="header">
         <div class="site-name">
             <a href="/">
-                <img src="{{ url_for('static', filename='images/yawgbargain_logo.png') }}" alt="YawgBargain">
+                <img height="50px" width="auto" src="{{ url_for('static', filename='images/yawgbargain_logo.png') }}" alt="YawgBargain">
             </a>
             <div class="search-bar">
                 <input type="search" placeholder="Search (Coming Soon)..." disabled>
@@ -61,4 +61,3 @@
 
     <button id="footer-toggle" class="footer-toggle">▲</button>
 </body>
-</html>

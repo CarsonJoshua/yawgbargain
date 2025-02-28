@@ -106,7 +106,8 @@ body {
 
 #content {
     margin-top: 60px;
-    padding: 20px;
+    padding: 40px;
+    transition: padding-bottom 0.3s ease-in-out;
 }
 
 .footer {
@@ -153,10 +154,6 @@ body {
 
 .site-name img {
     display: block;
-}
-
-.content {
-    padding: 20px;
 }
 
 .deck-container {

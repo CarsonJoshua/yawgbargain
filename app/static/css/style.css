@@ -104,9 +104,9 @@ body {
     }
 }
 
-#content {
+.content {
     margin-top: 60px;
-    padding: 20px;
+    padding: 40px;
 }
 
 .footer {
@@ -153,10 +153,6 @@ body {
 
 .site-name img {
     display: block;
-}
-
-.content {
-    padding: 20px;
 }
 
 .deck-container {

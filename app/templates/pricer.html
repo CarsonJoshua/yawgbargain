@@ -6,45 +6,54 @@
 <div class="content">
     <h2>Deck Pricer</h2>
 
-    <form method="post">
-        <label for="deck_list">Enter Deck List:</label><br>
-        <textarea id="deck_list" name="deck_list" rows="10" cols="50">
-            {%- if deck_list -%}
-                {{ deck_list }}
-            {%- endif -%}
-        </textarea><br>
+    <div class="deck-container">
+        <!-- Left Column: Form Input -->
+        <div class="deck-input">
+            <form method="post">
+                <label for="deck_list">Enter Deck List:</label><br>
+                <textarea id="deck_list" name="deck_list" rows="10" cols="50">
+                    {%- if deck_list -%}
+                        {{ deck_list }}
+                    {%- endif -%}
+                </textarea><br>
 
-        <label for="price_date">Select Date for Prices:</label>
-        <input type="date" id="price_date" name="price_date" value="{{ price_date if price_date else '' }}">
-        <br>
+                <label for="price_date">Select Date for Prices:</label>
+                <input type="date" id="price_date" name="price_date" value="{{ price_date if price_date else '' }}">
+                <br>
 
-        <button type="submit">Price Deck</button>
-    </form>
+                <button type="submit">Price Deck</button>
+            </form>
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-    {% for category, message in messages %}
-    <p class="{{ category }}">{{ message }}</p>
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
-
-    {% if deck_prices %}
-    <h3>Deck Pricing ({{ price_date }})</h3>
-    <ul>
-        {% for amount, card_id, card_name, price in deck_prices %}
-        <li {% if not card_id %}style="color: red;" {% endif %}>
-            {% if card_id %}
-            {{ price }} - {{ amount }}x
-            <a href="{{ url_for('card_history.card_history', id=card_id) }}">{{ card_name }}</a>
-            {% else %}
-            0.00 - {{ amount }}x {{ card_name }}
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <p class="{{ category }}">{{ message }}</p>
+            {% endfor %}
             {% endif %}
-            {% if amount > 1 %} (each){% endif %}
-        </li>
-        {% endfor %}
-    </ul>
-    <h3>Total Price: {{ total_price }}</h3>
-    {% endif %}
+            {% endwith %}
+        </div>
+
+        <!-- Right Column: Deck Pricing Output -->
+        <div class="deck-output">
+            {% if deck_prices %}
+            <h3>Deck Pricing ({{ price_date }})</h3>
+            <ul>
+                {% for amount, card_id, card_name, price in deck_prices %}
+                <li {% if not card_id %}style="color: red;" {% endif %}>
+                    {% if card_id %}
+                    {{ price }} - {{ amount }}x
+                    <a href="{{ url_for('card_history.card_history', id=card_id) }}">{{ card_name }}</a>
+                    {% else %}
+                    0.00 - {{ amount }}x {{ card_name }}
+                    {% endif %}
+                    {% if amount > 1 %} (each){% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+            <h3>Total Price: {{ total_price }}</h3>
+            {% endif %}
+        </div>
+    </div>
 </div>
+
 {% endblock content %}

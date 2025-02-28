@@ -158,3 +158,23 @@ body {
 .content {
     padding: 20px;
 }
+
+.deck-container {
+    display: flex;
+    gap: 20px;
+}
+
+.deck-input, .deck-output {
+    flex: 1;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.deck-input {
+    background-color: #f9f9f9;
+}
+
+.deck-output {
+    background-color: #ffffff;
+}

@@ -162,6 +162,7 @@ body {
 .deck-container {
     display: flex;
     gap: 20px;
+    flex-wrap: wrap; /* Ensures elements wrap on smaller screens */
 }
 
 .deck-input, .deck-output {
@@ -171,10 +172,25 @@ body {
     border-radius: 8px;
 }
 
-.deck-input {
-    background-color: #f9f9f9;
+/* Default: Two-column layout */
+@media (min-width: 768px) { 
+    .deck-container {
+        flex-wrap: nowrap; /* Prevents wrapping on larger screens */
+    }
+
+    .deck-input, .deck-output {
+        width: 50%; /* Each takes half the screen */
+    }
 }
 
-.deck-output {
-    background-color: #ffffff;
+/* Mobile: One-column layout */
+@media (max-width: 767px) {
+    .deck-container {
+        flex-direction: column; /* Stack items vertically */
+    }
+
+    .deck-input, .deck-output {
+        width: 100%; /* Full width on small screens */
+    }
 }
+

@@ -1,6 +1,6 @@
 import requests, json, os
 from datetime import date
-from run import app
+from app import create_app
 from app.dao import db
 from app.models import Card, CardPrice
 
@@ -71,5 +71,6 @@ def update_card_prices():
 
 
 if __name__ == "__main__":
+    app = create_app()
     with app.app_context():
         update_card_prices()

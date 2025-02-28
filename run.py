@@ -20,7 +20,7 @@ if __name__ == "__main__":
         subprocess.call(f'{venv_activation}', shell=True)
     else:
         subprocess.call(f'source {venv_activation}', shell=True, executable='/bin/bash')
-        from app import create_app
+    from app import create_app
     from app.config import Config
     app = create_app()
     if Config.DEBUG:

@@ -32,6 +32,8 @@ def get_latest_prices(card_names, price_date):
         )
         .join(Card, CardPrice.card_id == Card.id)
         .group_by(Card.name, Card.id)
+        .order_by(Card.name, func.min(CardPrice.price))
+        .distinct(Card.name)
         .all()
     )
 

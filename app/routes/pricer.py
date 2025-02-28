@@ -21,7 +21,7 @@ def pricer():
         for line in deck_list.split("\n"):
             line = line.strip()
             if line:
-                match = re.match(r'(\d+)\s+(.*)', line)
+                match = re.match(r'(\d+)x?\s+(.*)', line)
                 if match:
                     amount = int(match.group(1))
                     card_name = match.group(2)
